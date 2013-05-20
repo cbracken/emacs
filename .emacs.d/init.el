@@ -33,7 +33,7 @@
 (GNUEmacs
   (menu-bar-mode nil)
   (if (display-graphic-p)
-    (tool-bar-mode nil)))
+    (tool-bar-mode -1)))
 (XEmacs
   (set-specifier top-toolbar-visible-p nil))
 
@@ -177,9 +177,8 @@
     (require 'font-lock)
     (setq font-lock-maximum-decoration t)
     (global-font-lock-mode t)
-    (require 'color-theme)
-    (color-theme-initialize)
-    (load-file "~/.emacs.d/lisp/themes/color-theme-blackboard.el"))))
+    (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+    (load-theme 'blackboard t))))
 (XEmacs
   (require 'font-lock))
 

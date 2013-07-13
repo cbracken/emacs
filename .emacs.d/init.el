@@ -4,23 +4,12 @@
 ;; Inhibit the emacs startup message
 (setq inhibit-startup-message t)
 
-;; Are we running XEmacs or GNU Emacs?
-(defvar running-xemacs (string-match "XEmacs\\|Lucid" emacs-version))
-
 ;; Some macros
-(defmacro GNUEmacs (&rest x)
-  (list 'if (not running-xemacs) (cons 'progn x)))
-(defmacro XEmacs (&rest x)
-  (list 'if running-xemacs (cons 'progn x)))
 (defmacro Xlaunch (&rest x)
   (list 'if (eq window-system 'x)(cons 'progn x)))
 
 ;; Fix del key behaviour
-(GNUEmacs
-  (Xlaunch (define-key global-map [(delete)] "\C-d")))
-(XEmacs
-  (if (eq window-system 'x)
-    (global-set-key (read-kbd-macro "DEL") 'delete-char)))
+(Xlaunch (define-key global-map [(delete)] "\C-d"))
 
 ;; Set username and email address
 (setq user-mail-address "chris@bracken.jp")
@@ -30,17 +19,15 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;; Hide the menubar
-(GNUEmacs
-  (menu-bar-mode nil)
-  (if (display-graphic-p)
-    (tool-bar-mode -1)))
-(XEmacs
-  (set-specifier top-toolbar-visible-p nil))
+(menu-bar-mode nil)
+(if (display-graphic-p)
+  (tool-bar-mode -1))
 
 ;; Display current line/column in the status bar.
 (line-number-mode 1)
 (column-number-mode 1)
 
+;; SQL mode
 (require 'sql)
 (add-hook 'sql-mode-hook
   (lambda ()
@@ -49,15 +36,9 @@
       (append sql-mode-font-lock-keywords
         '(("\"\\([^\"]*\\)\"" 0 font-lock-string-face t)
           ("'\\([^']*\\)'" 0 font-lock-string-face t))))))
-(setq auto-mode-alist (cons '("\\.xi$" . xml-mode) auto-mode-alist))
 
 ;; Dart support
 (require 'dart-mode)
-
-;; Set up modes for XML and FIX
-;; (add-to-list 'load-path (expand-file-name "~/local/share/site-lisp"))
-
-;;----------------------------------------
 
 ;; Set the default editing mode to text mode with word wrap
 (setq default-major-mode 'text-mode)
@@ -68,12 +49,6 @@
 
 ;; Purge excess file versions quietly.
 (setq trim-versions-without-asking t)
-
-;; Set font
-;; (GNUEmacs
-;;   (set-default-font "-apple-dejavu sans mono-medium-r-normal--0-0-0-0-m-0-mac-roman"))
-;; (XEmacs
-;;   (set-face-font 'default "-misc-fixed-medium-r-*-*-*-100-*-*-*-*-iso8859-1" nil))
 
 ;; Reduce noise pollution; increase light pollution.
 (setq visible-bell t)
@@ -112,12 +87,13 @@
     ("\\.xml\\(\\'\\|\\.\\)" . xml-mode)
     ("\\.css\\'" . css-mode)
     ("\\.dart\\'" . dart-mode)
+    ("\\.xi$" . xml-mode)
   ) auto-mode-alist))
 
 ;; Add some handy shortcuts
-(GNUEmacs
-  (add-hook 'dired-load-hook (function (lambda () (load "dired-x"))))
-  (setq dired-omit-files-p t))
+(add-hook 'dired-load-hook (function (lambda () (load "dired-x"))))
+(setq dired-omit-files-p t)
+
 (global-set-key [f1] 'dired)
 (global-set-key [f2] 'dired-omit-toggle)
 (global-set-key [f3] 'tshell)
@@ -138,17 +114,10 @@
 (defun down-alot () (interactive) (scroll-down))
 (global-set-key [mouse-4] 'down-slightly)
 (global-set-key [mouse-5] 'up-slightly)
-(GNUEmacs
-  (global-set-key [S-mouse-4] 'down-one)
-  (global-set-key [S-mouse-5] 'up-one)
-  (global-set-key [C-mouse-4] 'down-alot)
-  (global-set-key [C-mouse-5] 'up-alot))
-(XEmacs
-  (cond (window-system (mwheel-install)))
-  (global-set-key [shift-mouse-4] 'down-one)
-  (global-set-key [shift-mouse-5] 'up-one)
-  (global-set-key [ctrl-mouse-4] 'down-alot)
-  (global-set-key [ctrl-mouse-5] 'up-alot))
+(global-set-key [S-mouse-4] 'down-one)
+(global-set-key [S-mouse-5] 'up-one)
+(global-set-key [C-mouse-4] 'down-alot)
+(global-set-key [C-mouse-5] 'up-alot)
 
 ;; CSS-mode
 (autoload 'css-mode "css-mode" "Major mode to edit CSS files." t)
@@ -166,25 +135,17 @@
 
 ;; Set custom colours
 (set-face-foreground 'default "Gainsboro")
-
-;;(GNUEmacs
-(XEmacs
-  (set-face-foreground 'modeline "Yellow")
-  (set-face-background 'modeline "DarkSlateBlue"))
 (set-face-foreground 'modeline "Yellow")
 (set-face-background 'modeline "DarkBlue")
 (set-cursor-color "orange")
 
 ;; Turn on syntax highlighting
-(GNUEmacs
-  (cond ((fboundp 'global-font-lock-mode)
-    (require 'font-lock)
-    (setq font-lock-maximum-decoration t)
-    (global-font-lock-mode t)
-    (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-    (load-theme 'blackboard t))))
-(XEmacs
-  (require 'font-lock))
+(cond ((fboundp 'global-font-lock-mode)
+  (require 'font-lock)
+  (setq font-lock-maximum-decoration t)
+  (global-font-lock-mode t)
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+  (load-theme 'blackboard t)))
 
 ;; Allow keyboard text selection
 (setq transient-mark-mode t)

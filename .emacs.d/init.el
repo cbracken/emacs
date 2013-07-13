@@ -51,6 +51,9 @@
           ("'\\([^']*\\)'" 0 font-lock-string-face t))))))
 (setq auto-mode-alist (cons '("\\.xi$" . xml-mode) auto-mode-alist))
 
+;; Dart support
+(require 'dart-mode)
+
 ;; Set up modes for XML and FIX
 ;; (add-to-list 'load-path (expand-file-name "~/local/share/site-lisp"))
 
@@ -108,6 +111,7 @@
     ("\\.s?html?\\'" . html-helper-mode)
     ("\\.xml\\(\\'\\|\\.\\)" . xml-mode)
     ("\\.css\\'" . css-mode)
+    ("\\.dart\\'" . dart-mode)
   ) auto-mode-alist))
 
 ;; Add some handy shortcuts

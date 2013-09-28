@@ -135,8 +135,6 @@
 
 ;; Set custom colours
 (set-face-foreground 'default "Gainsboro")
-(set-face-foreground 'modeline "Yellow")
-(set-face-background 'modeline "DarkBlue")
 (set-cursor-color "orange")
 
 ;; Turn on syntax highlighting
@@ -149,13 +147,3 @@
 
 ;; Allow keyboard text selection
 (setq transient-mark-mode t)
-
-;; Set default frame attributes
-(setq default-frame-plist
-  '((cursor-color . "red")
-    (cursor-type . box)
-    (foreground-color . "white")
-    (background-color . "black")
-    (width . 100 )
-    (height . 40)))
-

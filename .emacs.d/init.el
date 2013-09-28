@@ -27,16 +27,6 @@
 (line-number-mode 1)
 (column-number-mode 1)
 
-;; SQL mode
-(require 'sql)
-(add-hook 'sql-mode-hook
-  (lambda ()
-    (setq font-lock-defaults '(sql-mode-font-lock-keywords t t))
-    (setq sql-mode-font-lock-keywords
-      (append sql-mode-font-lock-keywords
-        '(("\"\\([^\"]*\\)\"" 0 font-lock-string-face t)
-          ("'\\([^']*\\)'" 0 font-lock-string-face t))))))
-
 ;; Dart support
 (require 'dart-mode)
 
@@ -57,14 +47,10 @@
 (setq require-final-newline t)
 
 ;; Diff options
-;; (require 'vc)
 (setq vc-diff-switches "-ubB")
 
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
-
-;; Clean up semantic.cache
-(setq semanticdb-default-save-directory (expand-file-name "~/.xemacs/semantic"))
 
 ;; Set C indentation style
 (defun my-c-mode-common-hook ()
@@ -73,21 +59,9 @@
   (setq tab-width 2))
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
-;; Better C++ syntax highlighting
-(autoload 'cpp-font-lock "cc-mode")
-
-;; Configure makefile modes for configure.in and automake files
 (setq auto-mode-alist
   (append '(
-    ("\\.h$" . c++-mode)
-    ("configure.in" . m4-mode)
-    ("\\.m4\\'" . m4-mode)
-    ("\\.am\\'" . makefile-mode)
-    ("\\.s?html?\\'" . html-helper-mode)
-    ("\\.xml\\(\\'\\|\\.\\)" . xml-mode)
-    ("\\.css\\'" . css-mode)
     ("\\.dart\\'" . dart-mode)
-    ("\\.xi$" . xml-mode)
   ) auto-mode-alist))
 
 ;; Add some handy shortcuts
@@ -113,20 +87,6 @@
 (global-set-key [S-mouse-5] 'up-one)
 (global-set-key [C-mouse-4] 'down-alot)
 (global-set-key [C-mouse-5] 'up-alot)
-
-;; CSS-mode
-(autoload 'css-mode "css-mode" "Major mode to edit CSS files." t)
-
-;; Configure PSGML module
-(setq sgml-always-quote-attributes t)       ; expected by many clients
-(setq sgml-auto-insert-required-elements t) ; auto insert required tags
-(setq sgml-indent-data t)                   ; auto-indent
-(setq sgml-indent-step 2)                   ; set the indent
-(setq sgml-suppress-warning t)
-(setq sgml-auto-activate-dtd nil)           ; don't preload dtd
-(setq sgml-omittag nil)
-(setq sgml-shorttag nil)
-(setq sgml-recompile-out-of-date-cdtd nil)
 
 ;; Set custom colours
 (set-face-foreground 'default "Gainsboro")

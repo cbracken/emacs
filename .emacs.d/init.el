@@ -95,14 +95,9 @@
 (setq dired-omit-files-p t)
 
 (global-set-key [f1] 'dired)
-(global-set-key [f2] 'dired-omit-toggle)
-(global-set-key [f3] 'tshell)
-(global-set-key [f4] 'find-file)
 (global-set-key [f5] 'revert-buffer)
 (global-set-key [f6] 'visit-tags-table)
 (global-set-key [f7] 'compile)
-(global-set-key [f8] 'add-change-log-entry-other-window)
-(global-set-key [f10] 'font-lock-fontify-buffer)
 (global-set-key [f12] 'goto-line)
 
 ;; Configure mouse wheel to work with emacs

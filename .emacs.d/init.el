@@ -86,6 +86,7 @@
 (global-set-key [C-mouse-5] 'up-alot)
 
 ;; Set custom colours
+(set-default-font "-apple-Menlo-medium-normal-normal-*-11-*-*-*-m-0-iso10646-1")
 (set-face-foreground 'default "Gainsboro")
 (set-cursor-color "orange")
 

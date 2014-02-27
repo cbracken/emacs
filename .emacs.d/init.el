@@ -95,7 +95,8 @@
   (setq font-lock-maximum-decoration t)
   (global-font-lock-mode t)
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-  (load-theme 'blackboard t)))
+  (if (display-graphic-p)
+    (load-theme 'blackboard t))))
 
 ;; Allow keyboard text selection
 (setq transient-mark-mode t)

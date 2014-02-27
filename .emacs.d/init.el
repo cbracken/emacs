@@ -40,9 +40,6 @@
 ;; Purge excess file versions quietly.
 (setq trim-versions-without-asking t)
 
-;; Reduce noise pollution; increase light pollution.
-(setq visible-bell t)
-
 ;; Ensure file always ends in newline
 (setq require-final-newline t)
 

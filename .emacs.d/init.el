@@ -95,9 +95,10 @@
   (require 'font-lock)
   (setq font-lock-maximum-decoration t)
   (global-font-lock-mode t)
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-  (if (display-graphic-p)
-    (load-theme 'blackboard t))))
+  (require 'color-theme)
+  (color-theme-initialize)
+  (load-file "~/.emacs.d/lisp/themes/lucius-theme.el")
+  (color-theme-lucius)))
 
 ;; Allow keyboard text selection
 (setq transient-mark-mode t)

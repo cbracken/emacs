@@ -23,6 +23,9 @@
 (if (display-graphic-p)
   (tool-bar-mode -1))
 
+;; Highlight the current line
+(global-hl-line-mode 1)
+
 ;; Display current line/column in the status bar.
 (line-number-mode 1)
 (column-number-mode 1)
@@ -89,6 +92,7 @@
 (set-default-font "-apple-Menlo-medium-normal-normal-*-11-*-*-*-m-0-iso10646-1")
 (set-face-foreground 'default "Gainsboro")
 (set-cursor-color "orange")
+(set-face-background 'hl-line "grey24")
 
 ;; Turn on syntax highlighting
 (cond ((fboundp 'global-font-lock-mode)

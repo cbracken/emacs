@@ -7,6 +7,16 @@
 ;; Some macros
 (defmacro Xlaunch (&rest x)
   (list 'if (eq window-system 'x)(cons 'progn x)))
+(cond
+  ((string-match "apple-darwin" system-configuration)
+    (setq os-type 'mac))
+  ((string-match "linux" system-configuration)
+    (setq os-type 'linux))
+  ((string-match "freebsd" system-configuration)
+    (setq os-type 'bsd)))
+(defun mac? () (eq os-type 'mac))
+(defun linux? () (eq os-type 'linux))
+(defun bsd? () (eq os-type 'bsd))
 
 ;; Fix del key behaviour
 (Xlaunch (define-key global-map [(delete)] "\C-d"))
@@ -89,7 +99,8 @@
 (global-set-key [C-mouse-5] 'up-alot)
 
 ;; Set custom colours
-(set-default-font "-apple-Menlo-medium-normal-normal-*-11-*-*-*-m-0-iso10646-1")
+(when (mac?)
+  (set-default-font "-apple-Menlo-medium-normal-normal-*-11-*-*-*-m-0-iso10646-1"))
 (set-face-foreground 'default "Gainsboro")
 (set-cursor-color "orange")
 (set-face-background 'hl-line "grey24")

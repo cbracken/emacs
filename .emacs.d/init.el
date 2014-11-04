@@ -99,8 +99,9 @@
 (global-set-key [C-mouse-5] 'up-alot)
 
 ;; Set custom colours
-(when (mac?)
-  (set-default-font "-apple-Menlo-medium-normal-normal-*-11-*-*-*-m-0-iso10646-1"))
+(if (mac?)
+  (set-default-font "-apple-Menlo-medium-normal-normal-*-11-*-*-*-m-0-iso10646-1")
+  (set-default-font "-adobe-Source Code Pro-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1"))
 (set-face-foreground 'default "Gainsboro")
 (set-cursor-color "orange")
 (set-face-background 'hl-line "grey24")

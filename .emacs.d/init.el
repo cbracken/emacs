@@ -101,7 +101,7 @@
 ;; Set custom colours
 (if (mac?)
   (set-default-font "-apple-Menlo-medium-normal-normal-*-11-*-*-*-m-0-iso10646-1")
-  (set-default-font "-adobe-Source Code Pro-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1"))
+  (set-default-font "-misc-fixed-medium-r-normal--0-0-75-75-c-0-iso8859-1"))
 (set-face-foreground 'default "Gainsboro")
 (set-cursor-color "orange")
 (set-face-background 'hl-line "grey24")

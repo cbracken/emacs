@@ -111,10 +111,8 @@
   (require 'font-lock)
   (setq font-lock-maximum-decoration t)
   (global-font-lock-mode t)
-  (require 'color-theme)
-  (color-theme-initialize)
-  (load-file "~/.emacs.d/lisp/themes/lucius-theme.el")
-  (color-theme-lucius)))
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+  (load-theme 'jbeans t)))
 
 ;; Allow keyboard text selection
 (setq transient-mark-mode t)
